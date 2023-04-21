@@ -1,5 +1,4 @@
 # CMake
-
 *.out
 CMakeLists.txt.user
 CMakeCache.txt
@@ -12,6 +11,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+cmake-build-*/
 
 # Prerequisites
 *.d
@@ -45,3 +45,7 @@ _deps
 *.exe
 *.out
 *.app
+
+# Cache
+
+.cache

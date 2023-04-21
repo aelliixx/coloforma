@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <vector>
 
-#include "colours.hpp"
+#include "Colours.hpp"
 
 #define MAX_ARGS 256
 
@@ -73,7 +73,7 @@ namespace __alx {
         std::string parseVector(const std::string& str)
         {
             static std::string componentColours[] = { ";200;0;0m", ";0;200;0m", ";0;0;200m", ";200;200;0m" };
-			std::stringstream base(str);
+            std::stringstream base(str);
             std::stringstream stream(str);
             std::string item;
             std::string out = "{";
@@ -153,19 +153,20 @@ namespace __alx {
         operator std::string() const { return _text; }
     };
 
-    template <typename... Param>
-    std::string parseText(const std::string& format, const Param&... arguments)
-    {
-        const VariadicArgParser<Param...> parser { format, arguments... };
-        return parser;
-    }
+}
+
+template <typename... Param>
+std::string getFormatted(const std::string& format, const Param&... arguments)
+{
+    const __alx::VariadicArgParser<Param...> parser { format, arguments... };
+    return parser;
 }
 
 template <typename... Param>
 void println(const std::string& format, const Param&... arguments)
 {
- 	const auto text = __alx::parseText(format, arguments...);
-	std::cout << text << '\n';
+    const auto text = getFormatted(format, arguments...);
+    std::cout << text << '\n';
 }
 
 template <typename...>
@@ -177,21 +178,21 @@ void println()
 template <typename... Param>
 void println(Colour colour, const std::string& format, const Param&... arguments)
 {
-    const auto text = __alx::parseText(format, arguments...);
+    const auto text = getFormatted(format, arguments...);
     println("\033[38;2;{};{};{}m{}\033[0m", colour.r, colour.g, colour.b, text);
 }
 
 template <typename... Param>
 void print(const std::string& format, const Param&... arguments)
 {
- 	const auto text = __alx::parseText(format, arguments...);
-	std::cout << text;
+    const auto text = getFormatted(format, arguments...);
+    std::cout << text;
 }
 
 template <typename... Param>
 void print(Colour colour, const std::string& format, const Param&... arguments)
 {
-    const auto text = __alx::parseText(format, arguments...);
+    const auto text = getFormatted(format, arguments...);
     print("\033[38;2;{};{};{}m{}\033[0m", colour.r, colour.g, colour.b, text);
 }
 }

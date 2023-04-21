@@ -1,5 +1,5 @@
-#include "colours.hpp"
-#include "println.hpp"
+#include <Colours.hpp>
+#include <Println.hpp>
 #include <stacktrace>
 #include <string>
 
@@ -26,9 +26,9 @@ int main()
     alx::println();
 
     alx::println(alx::Colour(), "This text is red");
-    alx::println(alx::Colour(123, 255, 54), "This text is green");
-    alx::println(alx::Colour(0, 13, 155), "This text is dark blue");
-    alx::println(alx::Colour(240, 30, 99), "This text is pink-ish");
+    alx::println(alx::Colour::Green, "This text is green");
+    alx::println(alx::Colour::Blue, "This text is dark blue");
+    alx::println(alx::Colour::Pink, "This text is pink-ish");
 
     alx::println();
     alx::println("-----------------------------");
@@ -59,4 +59,10 @@ int main()
 	alx::print("1.235 ");
 	alx::print(alx::Colour(250, 200, 0), "[{}: {}({}:{})]", __FILE__, __FUNCTION__, __LINE__, __LINE__);
 	alx::println(": hello from the source code");
+
+    alx::println();
+    alx::println("-----------------------------");
+    alx::println();
+
+	alx::println(alx::Colour::Orange, "{}", alx::Colour::Orange.to_string());
 }
